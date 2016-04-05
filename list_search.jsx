@@ -1,28 +1,31 @@
-/** @jsx React.DOM */
 
 var FilteredList = React.createClass({
-	filter-list : function (e) {
-		var initial-list = this.state.initial-items
-		updated-list = initial-list.filter(function(item){
+	filter_list : function (e) {
+		var initial_list = this.state.initial_items
+		var updated_list = initial_list.filter(function(item){
 			return item.toLowerCase().search(e.target.value.toLowerCase()) !== -1
 		})	
-		this.setState({final-items: updated-list})
+		this.setState({final_items: updated_list})
 	},
 	getInitialState : function(){
-		initial-items = [
+		return {
+			initial_items: [
 			"Steve Jobs",
 			"Steve Wozniak",
 			"Elon Musk",
 			"Bill Gates",
 			"Mark Zukerberg",
-		]
-		final-items = []
+			],
+			final_items: []
+		}
 	},
 	render : function(){
+		return (
 		<div className = "filter-list">
-			<input type = "text" placeholder = "Search" onChange = {this.filter-list}/>
-			<List final-items = {this.state.final-items}/>
+			<input type = "text" placeholder = "Search" onChange = {this.filter_list}/>
+			<List final_items = {this.state.final_items}/>
 		</div>
+		)
 	}
 }); 
 
@@ -31,11 +34,13 @@ var List = React.createClass({
 		return (
 			<ul>
 			{
-				this.props.final-items.maps(function(item){
-					return <li>{item}</li>
+				this.props.final_items.map(function(item){
+					return <li key={item}>{item}</li>
 				})
 			}
 			</ul>
 		)
 	}
 });
+
+ReactDOM.render(<FilteredList />, document.getElementById('mount-point'))
