@@ -25,3 +25,17 @@ var FilteredList = React.createClass({
 		</div>
 	}
 }); 
+
+var List = React.createClass({
+	render : function(){
+		return (
+			<ul>
+			{
+				this.props.final-items.maps(function(item){
+					return <li>{item}</li>
+				})
+			}
+			</ul>
+		)
+	}
+});
